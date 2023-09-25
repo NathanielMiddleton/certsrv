@@ -27,7 +27,7 @@ if ! [ -d $DESTINATION ]; then
 fi
 
 # Grab cert
-curl --silent -o $CERTNAME --user $USERNAME:$PASSWORD --ntlm "https://$SERVERNAME/certsrv/certnew.cer?ReqID=CACert&Renewal=5&Mode=inst&Enc=b64"
+curl --http1.1 --silent -o $CERTNAME --user $USERNAME:$PASSWORD --ntlm "https://$SERVERNAME/certsrv/certnew.cer?ReqID=CACert&Renewal=5&Mode=inst&Enc=b64"
 
 # Check if expiration is within $DAY/$WEEK/$MONTH/$YEAR
 if ! openssl x509 -checkend $MONTH -noout -in $CERTNAME >/dev/null; then
